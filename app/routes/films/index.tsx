@@ -1,5 +1,5 @@
 import { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import { Film, getFilms } from "~/api/films";
 
 // SERVER SIDE
@@ -27,7 +27,7 @@ export default function FilmsIndex(title?: string) {
         <div className="p-16 font-sans">
             <h1 className="text-5xl font-bold text-center">Studio Ghibli Films</h1>
 
-            <form className="py-5">
+            <Form reloadDocument method="get" className="py-5">
                 <label className="font-bold">
                     Search{' '}
                     <input type="text" name="title" placeholder="Type a title..." className="border-2 rounded py-2 px-3"/>
@@ -39,14 +39,19 @@ export default function FilmsIndex(title?: string) {
                 >
                     Search
                 </button>
-            </form>
+            </Form>
 
             <div className="grid grid-cols-4 gap-4">
                 {films.map((film) => (
-                    <div className="hover:shadow=2xl hover:scale-105 hover:font-bold cursor-pointer">
+                    <Link 
+                        title={film.id} 
+                        key={film.id} 
+                        to={film.id} className="hover:shadow=2xl hover:scale-105 hover:font-bold cursor-pointer"
+                        prefetch="none"
+                    >
                         <div>{film.title}</div>
                         <img src={film.image} alt={film.title} />
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
