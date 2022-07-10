@@ -47,7 +47,7 @@ export default function FilmsIndex(title?: string) {
                         title={film.id} 
                         key={film.id} 
                         to={film.id} className="hover:shadow=2xl hover:scale-105 hover:font-bold cursor-pointer"
-                        prefetch="none"
+                        prefetch="intent"
                     >
                         <div>{film.title}</div>
                         <img src={film.image} alt={film.title} />
